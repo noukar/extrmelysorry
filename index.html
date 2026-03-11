@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A Letter For You</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ffd6e7,#ffeef5);
+font-family:'Segoe UI',sans-serif;
+overflow:hidden;
+text-align:center;
+}
+
+/* intro */
+
+#intro{
+font-size:22px;
+color:#e46a8c;
+margin-bottom:40px;
+max-width:520px;
+line-height:1.6;
+padding:0 20px;
+transition:0.5s;
+}
+
+/* hearts */
+
+.heart{
+position:absolute;
+top:-40px;
+font-size:18px;
+animation:fall linear infinite;
+opacity:0.6;
+}
+
+@keyframes fall{
+0%{transform:translateY(-40px);}
+100%{transform:translateY(110vh);}
+}
+
+/* starting card */
+
+.card{
+width:380px;
+height:240px;
+background:#ff9dbb;
+border-radius:25px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:21px;
+line-height:1.6;
+padding:30px;
+box-shadow:0 15px 35px rgba(0,0,0,0.15);
+transition:0.6s;
+}
+
+/* heart button */
+
+.turn{
+margin-top:25px;
+background:white;
+color:#ff4d88;
+border-radius:50%;
+width:46px;
+height:46px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+cursor:pointer;
+box-shadow:0 6px 18px rgba(0,0,0,0.15);
+transition:0.25s;
+}
+
+.turn:hover{
+transform:scale(1.15);
+}
+
+/* big letter */
+
+.letter{
+display:none;
+width:540px;
+background:white;
+padding:50px;
+border-radius:25px;
+box-shadow:0 18px 45px rgba(0,0,0,0.15);
+line-height:1.9;
+font-size:18px;
+color:#444;
+animation:fadeIn 0.8s ease;
+}
+
+.letter strong{
+font-size:22px;
+color:#ff4d88;
+display:block;
+margin-bottom:15px;
+}
+
+/* final card */
+
+.final{
+display:none;
+width:540px;
+background:white;
+padding:45px;
+border-radius:25px;
+box-shadow:0 18px 45px rgba(0,0,0,0.15);
+line-height:1.9;
+font-size:18px;
+margin-top:20px;
+animation:fadeIn 0.8s ease;
+}
+
+.final h2{
+color:#ff4d88;
+margin-bottom:15px;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="intro"></div>
+
+<div class="card" id="card">
+
+💌  
+<br><br>
+This isn't just another website.  
+It's a small letter for you.
+
+<div class="turn" onclick="openLetter()">🤍</div>
+
+</div>
+
+
+<div class="letter" id="letter">
+
+<strong>Khushi</strong>
+
+You matter to me far more than a moment of careless words ever could.
+
+<br><br>
+
+I would never intentionally cross a line that hurts you.  
+If I did, it wasn't because I didn't care —  
+it's because I failed to be as careful with your feelings as I should have been.
+
+<br><br>
+
+I'm not trying to escape the mistake.  
+I'm trying to understand it.
+
+<div class="turn" onclick="showFinal()">🤍</div>
+
+</div>
+
+
+<div class="final" id="final">
+
+<h2>One last thing 💗</h2>
+
+You really matter to me.
+
+<br><br>
+
+I don't want this moment to become the end of our conversations.
+
+<br><br>
+
+I'd rather learn from this moment  
+than lose something meaningful because of it.
+
+<br><br>
+
+Thank you for reading this.
+
+</div>
+
+
+<script>
+
+/* typing intro */
+
+const text="Khushi… before you read this, just know this little letter exists because you matter to me.";
+let i=0;
+
+function typing(){
+if(i<text.length){
+document.getElementById("intro").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,40);
+}
+}
+
+typing();
+
+/* open letter */
+
+function openLetter(){
+
+document.getElementById("intro").style.display="none";
+
+const card=document.getElementById("card");
+card.style.opacity="0";
+
+setTimeout(()=>{
+card.style.display="none";
+document.getElementById("letter").style.display="block";
+},500);
+
+}
+
+/* show final message */
+
+function showFinal(){
+
+document.getElementById("letter").style.display="none";
+document.getElementById("final").style.display="block";
+
+}
+
+/* floating hearts */
+
+function createHeart(){
+
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💗";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*4+3)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{heart.remove()},7000);
+
+}
+
+setInterval(createHeart,500);
+
+</script>
+
+</body>
+</html>
